@@ -1,0 +1,25 @@
+.order-history-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.order-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.home-button {
+  padding: 10px 20px;
+  background-color: #2d3748;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
