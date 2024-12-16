@@ -171,12 +171,14 @@ useEffect(() => {
   // Search Methods
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
-
   const handleSearch = (term) => {
     setSearchTerm(term);
-    // Implement actual search logic here
+    // Filter products based on the search term
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredProducts(filtered);
   };
-
   const contextValue = {
     // Authentication Props
     user,

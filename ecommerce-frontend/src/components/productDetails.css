@@ -17,7 +17,7 @@
     transform: scale(1.05);
   }
   
-  .product-image {
+  .product-image-big {
     width: 100%;
     height: 200px;
     object-fit: cover;

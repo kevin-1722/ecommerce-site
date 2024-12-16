@@ -10,7 +10,7 @@ import Shoe6Image from '../pictures/nike6.png';
 import './productDetails.css';
 
 const ProductDetails = () => {
-  const { products } = useAppContext();
+  const { products, searchTerm, filteredProducts } = useAppContext();
 
   const imageMap = {
     1: Shoe1Image,
@@ -21,14 +21,15 @@ const ProductDetails = () => {
     6: Shoe6Image
   };
 
+  const productList = searchTerm ? filteredProducts : products
   return (
     <div className="product-grid">
-      {products.map((product) => (
+      {productList.map((product) => (
         <div key={product.id} className="product-card">
           <img 
             src={imageMap[product.id]} 
             alt={product.name} 
-            className="product-image"
+            className="product-image-big"
           />
           <div className="product-details">
             <h3 className="product-name">{product.name}</h3>

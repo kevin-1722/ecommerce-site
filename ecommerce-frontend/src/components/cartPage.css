@@ -38,10 +38,12 @@
   .quantity-control button {
     width: 30px;
     height: 30px;
-    background-color: #000000;
+    background-color: #2d3748;
     border: 1px solid #ddd;
     cursor: pointer;
-  }
+    position: relative;
+}
+
   
   .cart-summary {
     margin-top: 20px;

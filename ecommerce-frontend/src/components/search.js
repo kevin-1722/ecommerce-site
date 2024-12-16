@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+import { useAppContext } from './appContext';
 
 const Search = () => {
   const [query, setQuery] = useState('');
+  const { handleSearch } = useAppContext();
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleSearch = () => {
-    console.log('Searching for:', query);
-    setQuery('')
+    const searchTerm = e.target.value;
+    setQuery(searchTerm);
+    handleSearch(searchTerm);
   };
 
   return (
@@ -21,12 +20,8 @@ const Search = () => {
         placeholder="Search shoe..."
         className="search-input"
       />
-      <button onClick={handleSearch} className="search-button">
-        Search
-      </button>
     </div>
   );
 };
 
 export default Search;
-

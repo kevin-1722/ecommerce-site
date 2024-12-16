@@ -9,6 +9,7 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
 mongoose.connect('mongodb://localhost:27017/ecommerce')
   .then(() => console.log('Connected to MongoDB'))
