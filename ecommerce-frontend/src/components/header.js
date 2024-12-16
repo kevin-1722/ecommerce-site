@@ -15,8 +15,8 @@ const Header = () => {
       <div className="header-container">
         <div className="header-section header-left">
         {isLoggedIn && (
-            <div className="user-greeting">
-              Welcome, {user.username}!
+            <div className="header-link">
+              {user.username}
             </div>
           )}
           {isLoggedIn ? (
@@ -30,10 +30,14 @@ const Header = () => {
             <Link to="/sign-in" className="header-link">
               Sign In
             </Link>
+            
           )}
+          <Link to="/manage-products" className="header-link manage-products">
+              Manage Products
+            </Link>
         </div>
         <div className="header-section header-center">
-          <div className="header-logo">Kevin's Shoe Site</div>
+          <div className="header-logo">Kevin's Ecommerce Site</div>
         </div>
         <div className="header-section header-right">
           <Link to="/cart" className="header-link">

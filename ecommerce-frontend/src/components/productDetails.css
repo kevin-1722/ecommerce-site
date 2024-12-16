@@ -6,15 +6,11 @@
   }
   
   .product-card {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #2d3748;;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.05);
   }
   
   .product-image-big {

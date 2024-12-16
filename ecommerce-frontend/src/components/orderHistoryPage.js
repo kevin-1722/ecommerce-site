@@ -18,6 +18,9 @@ const OrderHistoryPage = () => {
         <p>Please sign in to view your order history.</p>
         <button onClick={() => navigate('/sign-in')} className="sign-in-button">
           Sign In
+        </button> <br />
+        <button onClick={handleGoHome} className="home-button">
+        Back Home
         </button>
       </div>
     );

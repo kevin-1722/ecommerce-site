@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     category: { 
       type: String, 
       required: true 
+    },
+    image: {
+      type: String,
+      required: true
     }
   });
   
@@ -41,7 +45,7 @@ const userSchema = new mongoose.Schema({
       ref: 'User',
       required: true
     },
-    username: String, // Keep for easy reference
+    username: String,
     items: [{
       id: Number,
       name: String,

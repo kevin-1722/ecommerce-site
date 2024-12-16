@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
   }
   
@@ -31,7 +31,7 @@
   }
   
   .header-logo {
-    font-size: 1.5rem;
+    font-size: 2em;
     font-weight: bold;
     text-align: center;
   }
@@ -41,6 +41,10 @@
     text-decoration: none;
     color: #fff;
     transition: color 0.3s ease;
+    font-size: 1.4rem;
+    border: solid 1px #fff;
+    padding: 0.3rem .6rem;
+    border-radius: 3px;
   }
   
   .header-link:hover {

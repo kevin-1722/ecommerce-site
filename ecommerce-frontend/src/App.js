@@ -11,6 +11,7 @@ import CartPage from './components/cartPage';
 import CheckoutPage from './components/checkoutPage';
 import OrderHistoryPage from './components/orderHistoryPage';
 import ProductListingPage from './components/productListingPage';
+import ManageProducts from './components/manageProducts';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage/>} />
             <Route path="/order-history" element={<OrderHistoryPage/>} />
             <Route path="/product/:id" element={<ProductListingPage/>} />
+            <Route path="/manage-products" element={<ManageProducts/>} />
           </Routes>
         </div>
       </Router>

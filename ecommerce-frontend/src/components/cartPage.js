@@ -40,7 +40,7 @@ const CartPage = () => {
             {cart.map((item) => (
               <div key={`${item.id}-${item.selectedSize}`} className="cart-item">
                 <img 
-                  src={item.image} 
+                  src={`http://localhost:5000${item.image}`} 
                   alt={item.name} 
                   className="cart-item-image" 
                 />

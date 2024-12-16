@@ -1,33 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppContext } from './appContext';
-import Shoe1Image from '../pictures/nike1.jpg';
-import Shoe2Image from '../pictures/nike2.png';
-import Shoe3Image from '../pictures/nike3.png';
-import Shoe4Image from '../pictures/nike4.png';
-import Shoe5Image from '../pictures/nike5.jpg';
-import Shoe6Image from '../pictures/nike6.png';
 import './productDetails.css';
 
 const ProductDetails = () => {
-  const { products, searchTerm, filteredProducts } = useAppContext();
+  const { 
+    products, 
+    searchTerm, 
+    filteredProducts,
+    handleFilterAndSort 
+  } = useAppContext();
 
-  const imageMap = {
-    1: Shoe1Image,
-    2: Shoe2Image,
-    3: Shoe3Image,
-    4: Shoe4Image,
-    5: Shoe5Image,
-    6: Shoe6Image
-  };
+  // State to manage the current displayed products
+  const [displayProducts, setDisplayProducts] = useState([]);
 
-  const productList = searchTerm ? filteredProducts : products
+  // Effect to update displayed products based on search and filtering
+  useEffect(() => {
+    // If there's a search term or filtered products, use those
+    if (searchTerm || filteredProducts.length > 0) {
+      setDisplayProducts(filteredProducts);
+    } else {
+      // Otherwise, use all products
+      setDisplayProducts(products);
+    }
+  }, [searchTerm, filteredProducts, products]);
+
   return (
     <div className="product-grid">
-      {productList.map((product) => (
+      {displayProducts.map((product) => (
         <div key={product.id} className="product-card">
           <img 
-            src={imageMap[product.id]} 
+            src={`http://localhost:5000${product.image}`} 
             alt={product.name} 
             className="product-image-big"
           />

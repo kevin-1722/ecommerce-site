@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { upload } = require('../controllers/productController');
 const productController = require('../controllers/productController');
 const orderController = require('../controllers/orderController');
 const userController = require('../controllers/userController');
@@ -7,8 +8,10 @@ const authMiddleware = require('../authMiddleware');
 
 // Product routes
 router.get('/products', productController.getProducts);
-router.post('/products', productController.createProduct);
 router.get('/products/:id', productController.getProductById);
+router.post('/products', upload.single('image'), productController.createProductWithImage);
+router.put('/products/:id', upload.single('image'), productController.updateProduct);
+router.delete('/products/:id', productController.deleteProduct);
 
 // Order routes
 router.get('/user-orders', authMiddleware, orderController.getUserOrders);

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProductDetails from './productDetails'
-import Search from './search'
+import SearchAndFilter from './searchAndFilter'
 import './homePage.css'
 
 const HomePage = () => {
@@ -22,7 +22,7 @@ const HomePage = () => {
         </button>
       </div>
       <div className="right-content">
-        <Search className="search" />
+        <SearchAndFilter className="search" />
         <ProductDetails />
       </div>
     </div>

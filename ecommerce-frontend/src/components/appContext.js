@@ -74,6 +74,98 @@ useEffect(() => {
   fetchProducts();
 }, []);
 
+  // Add product with full details and image upload
+  const addProduct = async (productData) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('id', productData.id);
+      formData.append('name', productData.name);
+      formData.append('price', productData.price);
+      formData.append('category', productData.category);
+      
+      if (productData.image) {
+        formData.append('image', productData.image);
+      }
+
+      const response = await axios.post('http://localhost:5000/api/products', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      // Update local state with new product
+      setProducts(prevProducts => [...prevProducts, response.data]);
+      return response.data;
+    } catch (error) {
+      console.error('Error adding product:', error);
+      return null;
+    }
+  };
+
+  // Update existing product
+  const updateProduct = async (productId, productData) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('id', productData.id);
+      formData.append('name', productData.name);
+      formData.append('price', productData.price);
+      formData.append('category', productData.category);
+      
+      if (productData.image) {
+        formData.append('image', productData.image);
+      }
+
+      const response = await axios.put(`http://localhost:5000/api/products/${productId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      // Update local state with updated product
+      setProducts(prevProducts => 
+        prevProducts.map(product => 
+          product._id === productId ? response.data : product
+        )
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Error updating product:', error);
+      return null;
+    }
+  };
+
+  // Delete product
+  const deleteProduct = async (productId) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      
+      await axios.delete(`http://localhost:5000/api/products/${productId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      // Remove product from local state
+      setProducts(prevProducts => 
+        prevProducts.filter(product => product._id !== productId)
+      );
+
+      return true;
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      return false;
+    }
+  };
+
   // Cart Methods (keep existing methods)
   const addToCart = (product, size = 'M', quantity = 1) => {
     const existingItem = cart.find(
@@ -179,6 +271,55 @@ useEffect(() => {
     );
     setFilteredProducts(filtered);
   };
+
+
+const handleFilterAndSort = (searchTerm = '', category = '', sortOption = '') => {
+  // Start with all products
+  let filteredProducts = [...products];
+
+  // Filter by search term
+  if (searchTerm) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  // Filter by category
+  if (category) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.category === category
+    );
+  }
+
+  // Sort products based on selected option
+  switch (sortOption) {
+    case 'nameAsc':
+      filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'nameDesc':
+      filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case 'priceDesc':
+      filteredProducts.sort((a, b) => b.price - a.price);
+      break;
+    case 'priceAsc':
+      filteredProducts.sort((a, b) => a.price - b.price);
+      break;
+    case 'idDesc':
+      filteredProducts.sort((a, b) => b.id - a.id);
+      break;
+    case 'idAsc':
+      filteredProducts.sort((a, b) => a.id - b.id);
+      break;
+    default:
+      // No sorting, maintain original order
+      break;
+  }
+
+  // Update filtered products
+  setFilteredProducts(filteredProducts);
+};
+
   const contextValue = {
     // Authentication Props
     user,
@@ -189,6 +330,9 @@ useEffect(() => {
     handleSignUp,
     handleSignOut,
     authError,
+    addProduct,
+    updateProduct,
+    deleteProduct,
 
     // Cart Props
     cart,
@@ -206,7 +350,8 @@ useEffect(() => {
     // Search Props
     searchTerm,
     filteredProducts,
-    handleSearch
+    handleSearch,
+    handleFilterAndSort,
   };
 
   return (
